@@ -1,7 +1,7 @@
 # Digital-Clock
 
 
-<iframe src="https://nabeelshar.github.io/Digital-Clock" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://ghbtns.com/github-btn.html?user=joshuacox&repo=digital-clock&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
 
 []: # Language: markdown
-[]: # Path: README.md
+[]: # Path: digital-clock/README.md
