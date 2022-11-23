@@ -2,231 +2,376 @@
 	<foreignObject width="100%" height="100%">
 		<div xmlns="http://www.w3.org/1999/xhtml">
 			<style>
-		#youtube-link {
-  align-items: center;
-  border-radius: 6px;
-  display: flex;
-  gap: 10px;
-  left: 50%;
-  padding: 10px;
-  pointer-events: all;
-  position: absolute;
-  text-decoration: none;
-  top: 10px;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  z-index: 100;
-}
-#youtube-link:hover, #youtube-link:focus {
-  backdrop-filter: blur(5px);
-  background-color: rgba(255, 255, 255, 0.1);
-}
-#youtube-link i, #youtube-link h1 {
-  height: 20px;
-  line-height: 20px;
-}
-#youtube-link i {
-  color: #c62828;
-  font-size: 1.25em;
-}
-#youtube-link h1 {
-  color: white;
-  font-size: 1em;
+		/* Play with speed and easing of the animation */
+/* =========================================== */
+.digit {
+  display: inline-block;
+  font-size: 200px;
+  color: rgba(0, 0, 0, 0.25);
+  height: 180px;
+  line-height: 1;
 }
 
-body {
-  background-color: #1e1e1e;
-  margin: 0px;
-  overflow: hidden;
-  padding: 0px;
-}
-body input, body h1, body a, body span {
-  color: #5a5a5a;
-  font-family: "Rubik", sans-serif;
-  font-weight: 400;
-  margin: 0px;
-  padding: 0px;
-}
-
-#app {
-  align-items: center;
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  width: 100vw;
-}
-#app #timer {
-  background: linear-gradient(to bottom right, #0263e1, #eb1836);
-  border-radius: 22px;
-}
-#app #timer #timer-text {
-  align-items: center;
-  background-color: #1e1e1e;
-  border-radius: 20px;
-  display: flex;
-  margin: 4px;
-  padding: 0px 20px;
-}
-#app #timer #timer-text .timer-char {
-  height: 150px;
+.time-part-wrapper {
+  display: inline-block;
+  margin-right: 50px;
   position: relative;
-  text-align: center;
-  width: 80px;
 }
-#app #timer #timer-text .timer-char.colon {
-  color: white;
-  font-size: 8em;
-  line-height: 150px;
-}
-#app #timer #timer-text .timer-char .timer-char-slider {
-  display: flex;
-  flex-direction: column;
-  left: 0px;
+.time-part-wrapper:not(:last-child):after {
+  content: ":";
+  display: block;
+  width: 30px;
+  height: 230px;
   position: absolute;
   top: 0px;
-  transition: top 200ms;
-  width: 80px;
-}
-#app #timer #timer-text .timer-char .timer-char-slider .timer-char-slider-option {
-  color: white;
-  font-size: 4em;
-  height: 150px;
-  line-height: 150px;
-  opacity: 0.05;
-  transition: opacity 400ms, font-size 400ms;
-  width: 80px;
-}
-#app #timer #timer-text .timer-char .timer-char-slider .timer-char-slider-option.active {
-  font-size: 8em;
-  opacity: 1;
+  right: -30px;
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 200px;
+  line-height: 0.9;
 }
 
-@media (max-width: 800px) {
-  #app #timer {
-    border-radius: 16px;
+.time-part {
+  width: 140px;
+  text-align: center;
+  height: 180px;
+  overflow: hidden;
+  display: inline-block;
+  margin-left: -5px;
+  box-sizing: border-box;
+}
+.time-part .digit-wrapper {
+  animation-timing-function: cubic-bezier(1, 0, 1, 0);
+}
+.time-part.minutes.tens .digit-wrapper {
+  animation-name: minutes-tens;
+  animation-duration: 3600s;
+  animation-iteration-count: 1;
+}
+.time-part.minutes.ones .digit-wrapper {
+  animation-name: minutes-ones;
+  animation-duration: 600s;
+  animation-iteration-count: 6;
+}
+.time-part.seconds.tens .digit-wrapper {
+  animation-name: seconds-tens;
+  animation-duration: 60s;
+  animation-iteration-count: 60;
+}
+.time-part.seconds.ones .digit-wrapper {
+  animation-name: seconds-ones;
+  animation-duration: 10s;
+  animation-iteration-count: 360;
+}
+.time-part.hundredths.tens .digit-wrapper {
+  animation-name: hundredths-tens;
+  animation-duration: 1s;
+  animation-iteration-count: 3600;
+}
+.time-part.hundredths.ones .digit-wrapper {
+  animation-name: hundredths-ones;
+  animation-duration: 0.1s;
+  animation-iteration-count: 36000;
+}
+
+@keyframes minutes-tens {
+  0% {
+    transform: translateY(-180px);
   }
-  #app #timer #timer-text {
-    border-radius: 14px;
-    margin: 4px;
-    padding: 0px 12px;
+  16.66667% {
+    transform: translateY(-360px);
   }
-  #app #timer #timer-text .timer-char {
-    height: 80px;
-    width: 40px;
+  33.33333% {
+    transform: translateY(-540px);
   }
-  #app #timer #timer-text .timer-char.colon {
-    font-size: 4em;
-    line-height: 80px;
+  50% {
+    transform: translateY(-720px);
   }
-  #app #timer #timer-text .timer-char .timer-char-slider {
-    width: 40px;
+  66.66667% {
+    transform: translateY(-900px);
   }
-  #app #timer #timer-text .timer-char .timer-char-slider .timer-char-slider-option {
-    font-size: 2em;
-    height: 80px;
-    line-height: 80px;
-    width: 40px;
-  }
-  #app #timer #timer-text .timer-char .timer-char-slider .timer-char-slider-option.active {
-    font-size: 4em;
+  83.33333% {
+    transform: translateY(-1080px);
   }
 }
-@media (max-width: 400px) {
-  #app #timer {
-    border-radius: 8px;
+@keyframes minutes-ones {
+  0% {
+    transform: translateY(-180px);
   }
-  #app #timer #timer-text {
-    border-radius: 6px;
-    margin: 2px;
-    padding: 0px 10px;
+  10% {
+    transform: translateY(-360px);
   }
-  #app #timer #timer-text .timer-char {
-    height: 40px;
-    width: 20px;
+  20% {
+    transform: translateY(-540px);
   }
-  #app #timer #timer-text .timer-char.colon {
-    font-size: 2em;
-    line-height: 40px;
+  30% {
+    transform: translateY(-720px);
   }
-  #app #timer #timer-text .timer-char .timer-char-slider {
-    width: 20px;
+  40% {
+    transform: translateY(-900px);
   }
-  #app #timer #timer-text .timer-char .timer-char-slider .timer-char-slider-option {
-    font-size: 1.25em;
-    height: 40px;
-    line-height: 40px;
-    width: 20px;
+  50% {
+    transform: translateY(-1080px);
   }
-  #app #timer #timer-text .timer-char .timer-char-slider .timer-char-slider-option.active {
-    font-size: 2em;
+  60% {
+    transform: translateY(-1260px);
+  }
+  70% {
+    transform: translateY(-1440px);
+  }
+  80% {
+    transform: translateY(-1620px);
+  }
+  90% {
+    transform: translateY(-1800px);
   }
 }
+@keyframes seconds-tens {
+  0% {
+    transform: translateY(-180px);
+  }
+  16.66667% {
+    transform: translateY(-360px);
+  }
+  33.33333% {
+    transform: translateY(-540px);
+  }
+  50% {
+    transform: translateY(-720px);
+  }
+  66.66667% {
+    transform: translateY(-900px);
+  }
+  83.33333% {
+    transform: translateY(-1080px);
+  }
+}
+@keyframes seconds-ones {
+  0% {
+    transform: translateY(-180px);
+  }
+  10% {
+    transform: translateY(-360px);
+  }
+  20% {
+    transform: translateY(-540px);
+  }
+  30% {
+    transform: translateY(-720px);
+  }
+  40% {
+    transform: translateY(-900px);
+  }
+  50% {
+    transform: translateY(-1080px);
+  }
+  60% {
+    transform: translateY(-1260px);
+  }
+  70% {
+    transform: translateY(-1440px);
+  }
+  80% {
+    transform: translateY(-1620px);
+  }
+  90% {
+    transform: translateY(-1800px);
+  }
+}
+@keyframes hundredths-tens {
+  0% {
+    transform: translateY(-180px);
+  }
+  10% {
+    transform: translateY(-360px);
+  }
+  20% {
+    transform: translateY(-540px);
+  }
+  30% {
+    transform: translateY(-720px);
+  }
+  40% {
+    transform: translateY(-900px);
+  }
+  50% {
+    transform: translateY(-1080px);
+  }
+  60% {
+    transform: translateY(-1260px);
+  }
+  70% {
+    transform: translateY(-1440px);
+  }
+  80% {
+    transform: translateY(-1620px);
+  }
+  90% {
+    transform: translateY(-1800px);
+  }
+}
+@keyframes hundredths-ones {
+  0% {
+    transform: translateY(-180px);
+  }
+  10% {
+    transform: translateY(-360px);
+  }
+  20% {
+    transform: translateY(-540px);
+  }
+  30% {
+    transform: translateY(-720px);
+  }
+  40% {
+    transform: translateY(-900px);
+  }
+  50% {
+    transform: translateY(-1080px);
+  }
+  60% {
+    transform: translateY(-1260px);
+  }
+  70% {
+    transform: translateY(-1440px);
+  }
+  80% {
+    transform: translateY(-1620px);
+  }
+  90% {
+    transform: translateY(-1800px);
+  }
+}
+body {
+  background: #F1614B;
+  margin: 0;
+  font-family: "Aldrich";
+}
+
+.wrapper {
+  margin: 100px auto;
+  width: 1000px;
+  position: relative;
+}
+.wrapper:before, .wrapper:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  height: 20px;
+  z-index: 10;
+}
+.wrapper:before {
+  top: 0px;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YxNjE0YiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2YxNjE0YiIgc3RvcC1vcGFjaXR5PSIwLjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #f1614b), color-stop(100%, rgba(241, 97, 75, 0)));
+  background-image: -moz-linear-gradient(top, #f1614b 0%, rgba(241, 97, 75, 0) 100%);
+  background-image: -webkit-linear-gradient(top, #f1614b 0%, rgba(241, 97, 75, 0) 100%);
+  background-image: linear-gradient(to bottom, #f1614b 0%, rgba(241, 97, 75, 0) 100%);
+}
+.wrapper:after {
+  bottom: 0px;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YxNjE0YiIgc3RvcC1vcGFjaXR5PSIwLjAiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMTYxNGIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(241, 97, 75, 0)), color-stop(100%, #f1614b));
+  background-image: -moz-linear-gradient(top, rgba(241, 97, 75, 0) 0%, #f1614b 100%);
+  background-image: -webkit-linear-gradient(top, rgba(241, 97, 75, 0) 0%, #f1614b 100%);
+  background-image: linear-gradient(to bottom, rgba(241, 97, 75, 0) 0%, #f1614b 100%);
+}
+
 			</style>
-<div id="root"></div>
-<!-- partial -->
-  <script src='https://unpkg.com/react@17/umd/react.development.js'></script>
-<script src='https://unpkg.com/react-dom@17/umd/react-dom.development.js'></script>
-<script src='https://unpkg.com/browse/@types/react@16.4.14/index.d.ts'></script>
-<script src='https://unpkg.com/browse/@types/react-dom@17.0.2/index.d.ts'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/classnames/2.3.1/index.min.js'></script>
-<script src='https://codepen.io/Hyperplexed/pen/xxYJYjM/54407644e24173ad6019b766443bf2a6.js'></script><script >"use strict";
-const TimerChar = (props) => {
-    const ref = React.useRef(null);
-    const colon = props.char === ":";
-    if (colon) {
-        return (React.createElement("h1", { className: "timer-char colon" }, ":"));
-    }
-    const number = parseInt(props.char);
-    const getCharSlider = () => {
-        let options = [];
-        for (let i = 0; i <= 9; i++) {
-            const classes = classNames("timer-char-slider-option", {
-                active: number === i
-            });
-            options.push(React.createElement("span", { key: i, className: classes }, i));
-        }
-        const height = ref.current ? ref.current.offsetHeight : 0, top = `${number * height * -1}px`;
-        return (React.createElement("div", { className: "timer-char-slider", style: { top } }, options));
-    };
-    return (React.createElement("div", { ref: ref, className: "timer-char number" }, getCharSlider()));
-};
-const Timer = () => {
-    const [date, setDateTo] = React.useState(new Date());
-    React.useEffect(() => {
-        const interval = setInterval(() => {
-            const update = new Date();
-            if (update.getSeconds() !== date.getSeconds()) {
-                setDateTo(update);
-            }
-        }, 100);
-        return () => {
-            clearInterval(interval);
-        };
-    }, [date]);
-    const formatSegment = (segment) => {
-        return segment < 10 ? `0${segment}` : segment;
-    };
-    const getHours = (hours) => {
-        return hours % 12 === 0 ? 12 : hours % 12;
-    };
-    const getTime = () => {
-        const hours = getHours(date.getHours()), minutes = date.getMinutes(), seconds = date.getSeconds();
-        return `${formatSegment(hours)}:${formatSegment(minutes)}:${formatSegment(seconds)}`;
-    };
-    const getChars = () => {
-        return getTime().split("").map((char, index) => (React.createElement(TimerChar, { key: index, char: char })));
-    };
-    return (React.createElement("div", { id: "timer" },
-        React.createElement("div", { id: "timer-text" }, getChars())));
-};
-const App = () => {
-    return (React.createElement("div", { id: "app" },
-        React.createElement(Timer, null),
-        React.createElement("a", { id: "youtube-link", href: "https://github.com/Nabeelshar", target: "_blank" },
-            React.createElement("i", { className: "fa-brands fa-github" }),
-            React.createElement("h1", null, "Github"))));
-};
-ReactDOM.render(React.createElement(App, null), document.getElementById("root")); </script>
+<div class='wrapper'>
+  <div class='time-part-wrapper'>
+    <div class='time-part minutes tens'>
+      <div class='digit-wrapper'>
+        <span class='digit'>0</span>
+        <span class='digit'>5</span>
+        <span class='digit'>4</span>
+        <span class='digit'>3</span>
+        <span class='digit'>2</span>
+        <span class='digit'>1</span>
+        <span class='digit'>0</span>
+      </div>
+    </div>
+    <div class='time-part minutes ones'>
+      <div class='digit-wrapper'>
+        <span class='digit'>0</span>
+        <span class='digit'>9</span>
+        <span class='digit'>8</span>
+        <span class='digit'>7</span>
+        <span class='digit'>6</span>
+        <span class='digit'>5</span>
+        <span class='digit'>4</span>
+        <span class='digit'>3</span>
+        <span class='digit'>2</span>
+        <span class='digit'>1</span>
+        <span class='digit'>0</span>
+      </div>
+    </div>
+  </div>
+  <div class='time-part-wrapper'>
+    <div class='time-part seconds tens'>
+      <div class='digit-wrapper'>
+        <span class='digit'>0</span>
+        <span class='digit'>5</span>
+        <span class='digit'>4</span>
+        <span class='digit'>3</span>
+        <span class='digit'>2</span>
+        <span class='digit'>1</span>
+        <span class='digit'>0</span>
+      </div>
+    </div>
+    <div class='time-part seconds ones'>
+      <div class='digit-wrapper'>
+        <span class='digit'>0</span>
+        <span class='digit'>9</span>
+        <span class='digit'>8</span>
+        <span class='digit'>7</span>
+        <span class='digit'>6</span>
+        <span class='digit'>5</span>
+        <span class='digit'>4</span>
+        <span class='digit'>3</span>
+        <span class='digit'>2</span>
+        <span class='digit'>1</span>
+        <span class='digit'>0</span>
+      </div>
+    </div>
+  </div>
+  <div class='time-part-wrapper'>
+    <div class='time-part hundredths tens'>
+      <div class='digit-wrapper'>
+        <span class='digit'>0</span>
+        <span class='digit'>9</span>
+        <span class='digit'>8</span>
+        <span class='digit'>7</span>
+        <span class='digit'>6</span>
+        <span class='digit'>5</span>
+        <span class='digit'>4</span>
+        <span class='digit'>3</span>
+        <span class='digit'>2</span>
+        <span class='digit'>1</span>
+        <span class='digit'>0</span>
+      </div>
+    </div>
+    <div class='time-part hundredths ones'>
+      <div class='digit-wrapper'>
+        <span class='digit'>0</span>
+        <span class='digit'>9</span>
+        <span class='digit'>8</span>
+        <span class='digit'>7</span>
+        <span class='digit'>6</span>
+        <span class='digit'>5</span>
+        <span class='digit'>4</span>
+        <span class='digit'>3</span>
+        <span class='digit'>2</span>
+        <span class='digit'>1</span>
+        <span class='digit'>0</span>
+      </div>
+    </div>
+  </div>
+</div>
+
 		</div>
 	</foreignObject>
 </svg>
