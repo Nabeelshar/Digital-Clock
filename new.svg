@@ -170,6 +170,6 @@ body input, body h1, body a, body span {
 <script src='https://unpkg.com/browse/@types/react-dom@17.0.2/index.d.ts'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/classnames/2.3.1/index.min.js'></script>
 <script src='https://codepen.io/Hyperplexed/pen/xxYJYjM/54407644e24173ad6019b766443bf2a6.js'></script><script  src="./script.js"></script>
-
+		</div>
 	</foreignObject>
 </svg>
